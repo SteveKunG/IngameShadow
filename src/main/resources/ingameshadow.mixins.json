@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.stevekung.ingameshadow.mixin",
+    "compatibilityLevel": "JAVA_16",
+    "client": [
+        "MixinCreateWorldScreen",
+        "WorldGenSettingsComponentAccessor"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

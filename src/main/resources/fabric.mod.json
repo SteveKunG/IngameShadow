@@ -1,0 +1,25 @@
+{
+    "schemaVersion": 1,
+    "id": "ingameshadow",
+    "version": "${version}",
+    "name": "In-game Shadow Seed",
+    "description": "A small mod that change normal and shadow seed before creating world",
+    "authors": [
+        "SteveKunG"
+    ],
+    "contact": {},
+    "license": "MIT",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "com.stevekung.ingameshadow.ShadowSeed"
+        ]
+    },
+    "mixins": [
+        "ingameshadow.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.11",
+        "minecraft": ">=1.17"
+    }
+}
