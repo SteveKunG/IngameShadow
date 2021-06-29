@@ -1,7 +1,5 @@
 package com.stevekung.ingameshadow.mixin;
 
-import java.util.function.Consumer;
-
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -9,8 +7,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.mojang.blaze3d.vertex.PoseStack;
+
 import com.stevekung.ingameshadow.SeedUtils;
+
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -18,7 +17,6 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
 import net.minecraft.client.gui.screens.worldselection.WorldGenSettingsComponent;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 
 @Mixin(CreateWorldScreen.class)
@@ -28,6 +26,7 @@ public abstract class MixinCreateWorldScreen extends Screen
     @Final
     public WorldGenSettingsComponent worldGenSettingsComponent;
 
+    @Override
     @Shadow
     protected abstract <T extends GuiEventListener & Widget & NarratableEntry> T addRenderableWidget(T guiEventListener);
 
@@ -51,17 +50,7 @@ public abstract class MixinCreateWorldScreen extends Screen
             {
                 accessor.getSeedEdit().setValue(String.valueOf(SeedUtils.getShadowSeed(optionalLong.getAsLong())));
             }
-        }, new Button.OnTooltip()
-        {
-            @Override
-            public void onTooltip(Button button, PoseStack poseStack, int x, int y)
-            {
-                MixinCreateWorldScreen.this.renderTooltip(poseStack, new TextComponent("Shadow Seed"), x, y);
-            }
-
-            @Override
-            public void narrateTooltip(Consumer<Component> consumer) {}
-        }));
+        }, (button, poseStack, x, y) -> this.renderTooltip(poseStack, new TextComponent("Shadow Seed"), x, y)));
     }
 
     @Inject(method = "tick", at = @At("TAIL"))

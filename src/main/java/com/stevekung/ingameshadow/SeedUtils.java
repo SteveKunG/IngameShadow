@@ -45,7 +45,7 @@ public class SeedUtils
 
     private static long modInverse(long a, int k)
     {
-        long x = ((a << 1L ^ a) & 0x4L) << 1L ^ a;
+        var x = ((a << 1L ^ a) & 0x4L) << 1L ^ a;
         x += x - a * x * x;
         x += x - a * x * x;
         x += x - a * x * x;
