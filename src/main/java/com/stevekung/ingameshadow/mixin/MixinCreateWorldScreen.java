@@ -24,7 +24,7 @@ public abstract class MixinCreateWorldScreen extends Screen
 {
     @Shadow
     @Final
-    public WorldGenSettingsComponent worldGenSettingsComponent;
+    WorldGenSettingsComponent worldGenSettingsComponent;
 
     @Override
     @Shadow
